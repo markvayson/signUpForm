@@ -10,7 +10,7 @@
   <body class="flex flex-col md:flex-row bg-gray-50">
     <div
       id="sidebar"
-      class="transition-opacity duration-300 w-full h-full bg-sideBar-Img bg-cover bg-no-repeat bg-center relative"
+      class="flex transition-opacity duration-300 w-full h-full bg-sideBar-Img bg-cover bg-no-repeat bg-center relative"
     >
       <div
         id="logo"
@@ -32,27 +32,49 @@
         </div>
         <div
           onclick="showForm()"
-          class="md:hidden border bg-red-400 focus:bg-red-300 active:bg-red-300 p-5 rounded-lg text-gray-50 font-bold border-gray-300 text-xl"
+          class="lg:hidden border bg-red-400 focus:bg-red-300 active:bg-red-300 p-5 rounded-lg text-gray-50 font-bold border-red-400 text-xl"
         >
           Sign Up
         </div>
       </div>
     </div>
     <div
-      id="form"
-      class="hidden md:flex w-full h-full flex-col items-center justify-center"
+      id="formDiv"
+      class="transition-opacity hidden duration-300 lg:flex w-full h-full flex-col items-center justify-center"
     >
-      <div class="h-full sm:w-10/12 md:w-auto">
+      <div class="relative sm:w-10/12 md:w-auto h-full">
         <div class="text-justify p-5 flex flex-col text-base font-medium">
-          <p class="">
+          <p class="pt-5">
             This is not a real online service! You know you need something like
             this in your life to help you realize your deepest dreams.
           </p>
           <p class="pt-2 font-bold">Sign up now to get started.</p>
           <p class="pt-5">You <i>know</i> you want to.</p>
         </div>
-        <div class="flex-1 flex bg-white p-5 w-full">
-          <form method="POST" class="flex flex-col sm:w-full md:w-auto gap-4">
+        <div
+          id="preloader"
+          class="absolute transform top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex transition-opacity duration-300 gap-2 items-center justify-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-8 w-8 animate-spin"
+            viewBox="0 -960 960 960"
+          >
+            <path
+              d="M480-80q-84 0-157-31t-127-85q-54-54-85-127T80-480q0-84 31-157t85-127q54-54 127-85t157-31q12 0 21 9t9 21q0 12-9 21t-21 9q-141 0-240.5 99.5T140-480q0 141 99.5 240.5T480-140q141 0 240.5-99.5T820-480q0-12 9-21t21-9q12 0 21 9t9 21q0 84-31 157t-85 127q-54 54-127 85T480-80Z"
+            />
+          </svg>
+          Processing...
+        </div>
+        <div
+          id="form-input"
+          class="transition-opacity hidden shadow-md duration-300 flex-1 lg:flex bg-white p-5 w-full"
+        >
+          <form
+            id="form"
+            onsubmit="postData();  return false; "
+            class="flex flex-col sm:w-full md:w-auto gap-4"
+          >
             <div class="gap-4 flex flex-col">
               <legend class="text-xl font-bold tracking-wider">
                 Let's do this!
@@ -61,28 +83,28 @@
                 class="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-4 w-full"
               >
                 <div class="flex flex-col basis-1/2 gap-2 p-1">
-                  <label for="first-name" class="font-bold tracking-wider"
+                  <label for="firstName" class="font-bold tracking-wider"
                     >FIRST NAME</label
                   >
                   <input
                     type="text"
-                    name="first-name"
-                    id="first-name"
-                    placeholder="Mark"
-                    class="pl-1 border border-gray-300 placeholder:text-gray-500"
+                    name="firstName"
+                    id="firstName"
+                    placeholder="First Name"
+                    class="pl-2 border bg-gray-200 rounded-lg p-2 border-gray-300 placeholder:text-gray-700"
                     required
                   />
                 </div>
                 <div class="flex flex-col basis-1/2 p-1">
-                  <label for="last-name" class="tracking-wider font-bold"
+                  <label for="lastName" class="tracking-wider font-bold"
                     >LAST NAME</label
                   >
                   <input
                     type="text"
-                    name="last-name"
-                    id="last-name"
-                    placeholder="Vayson"
-                    class="pl-1 border border-gray-300 placeholder:text-gray-500"
+                    name="lastName"
+                    id="lastName"
+                    placeholder="Last Name"
+                    class="pl-2 border bg-gray-200 rounded-lg p-2 border-gray-300 placeholder:text-gray-700"
                     required
                   />
                 </div>
@@ -91,30 +113,29 @@
                 class="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-4 w-full"
               >
                 <div class="flex flex-col basis-1/2 gap-2 p-1">
-                  <label for="email-address" class="tracking-wider font-bold"
+                  <label for="emailAdd" class="tracking-wider font-bold"
                     >EMAIL</label
                   >
                   <input
                     type="email"
-                    name="email-address"
-                    id="email-address"
-                    placeholder="markvayson@gmail.com"
+                    name="emailAdd"
+                    id="emailAdd"
+                    placeholder="email@example.com"
                     autocomplete="username"
-                    class="pl-1 border border-gray-300 placeholder:text-gray-500"
+                    class="pl-2 border bg-gray-200 rounded-lg p-2 border-gray-300 placeholder:text-gray-700"
                     required
                   />
                 </div>
                 <div class="flex flex-col basis-1/2 p-1">
-                  <label for="phone-number" class="tracking-wider font-bold"
+                  <label for="phone-Number" class="tracking-wider font-bold"
                     >PHONE NUMBER</label
                   >
                   <input
                     type="number"
-                    name="phone-number"
-                    id="phone-number"
-                    placeholder="+971 12 123 123"
-                    class="pl-1 border border-gray-300 placeholder:text-gray-500"
-                    required
+                    name="phoneNumber"
+                    id="phone-Number"
+                    placeholder="Phone Number"
+                    class="pl-2 border bg-gray-200 rounded-lg p-2 border-gray-300 placeholder:text-gray-700"
                   />
                 </div>
               </fieldset>
@@ -123,16 +144,16 @@
                 class="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-4 w-full"
               >
                 <div class="flex flex-col basis-1/2 gap-2 p-1">
-                  <label for="user-password" class="tracking-wider font-bold"
+                  <label for="userPass" class="tracking-wider font-bold"
                     >PASSWORD</label
                   >
                   <input
                     type="password"
-                    name="user-password"
-                    id="user-password"
+                    name="userPass"
+                    id="userPass"
                     autocomplete="new-password"
-                    placeholder="***"
-                    class="pl-1 border border-gray-300 placeholder:text-gray-500"
+                    placeholder="Password"
+                    class="pl-2 border bg-gray-200 rounded-lg p-2 border-gray-300 placeholder:text-gray-700"
                     required
                   />
                 </div>
@@ -142,16 +163,19 @@
                   >
                   <input
                     type="password"
-                    name="confirm-password"
-                    id="confirm-password"
+                    id="confirmPass"
                     autocomplete="new-password"
-                    placeholder="+971 12 123 123"
-                    class="pl-1 border border-gray-300 placeholder:text-gray-500"
+                    placeholder="Confirm Password"
+                    class="pl-2 border bg-gray-200 rounded-lg p-2 border-gray-300 placeholder:text-gray-700"
                     required
                   />
                 </div>
               </fieldset>
-              <p class="text-red-500">*Passwords does not match.</p>
+              <div class="w-full h-5">
+                <p id="error-password" class="text-red-500">
+                  *Passwords does not match.
+                </p>
+              </div>
             </div>
             <div class="flex flex-col gap-2">
               <button
@@ -160,7 +184,162 @@
               >
                 Create Account
               </button>
-              <p>Already have an account? Log in</p>
+              <p>
+                Already have an account?
+                <button
+                  type="button"
+                  onclick="whatForm('formLogin')"
+                  class="bg-gray-300 p-2 rounded-lg"
+                >
+                  Log in
+                </button>
+              </p>
+            </div>
+          </form>
+        </div>
+        <div
+          id="form-output"
+          class="flex shadow-md transition-opacity duration-300 flex-1 text-center gap-4 flex-col items-center justify-start bg-white p-5 w-full"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 -960 960 960"
+            class="w-24 h-24 fill-white border rounded-full bg-red-500 p-2"
+          >
+            <path
+              d="M110-120q-24 0-42-18t-18-42v-534h60v534h565v60H110Zm430-310L230-638v338h620v-338L540-430ZM230-240q-24 0-42-18t-18-42v-392q0-19.22 10-36.61T204-755l336-206 72 37-43 48-29-12-301 187 301 199 301-199-44-27 46-46 33 19q20 11 27 27.746T910-692v392q0 24-18 42t-42 18H230Zm302-355L416-711l43-43 73 73 228-228 43 43-271 271Zm8 295h310-620 310Z"
+            />
+          </svg>
+          <div id="signUpText" class="hidden">
+            <h1 class="text-3xl font-bold">
+              Thanks! <span id="created-name"></span>
+            </h1>
+            <h2 class="text-2xl font-bold">You're all signed up...</h2>
+            <p>Exciting things are just around the corner!</p>
+            <p>
+              Please don't check your email:<span id="email-address"></span> to
+              see your credentials.
+            </p>
+          </div>
+          <div id="logInText" class="">
+            <h1 class="text-3xl font-bold">
+              Hello! <span id="logged-name"></span>
+            </h1>
+            <h2 class="text-2xl font-bold">You're Logged In...</h2>
+            <p>Just kidding!</p>
+          </div>
+          <button
+            type="button"
+            onclick="whatForm('formInput')"
+            class="bg-red-500 active:bg-red-400 focus:bg-red-400 p-5 rounded-lg text-gray-100"
+          >
+            Retry
+          </button>
+        </div>
+        <div
+          id="form-login"
+          class="w-full transition-opacity flex flex-col duration-300 p-5 shadow-md bg-white"
+        >
+          <form
+            id="login-details"
+            class="flex flex-col gap-4"
+            onsubmit="logIn(); return false;"
+          >
+            <legend class="tracking-widest text-center text-2xl font-bold">
+              Login
+            </legend>
+            <fieldset
+              class="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-4 w-full"
+            >
+              <div class="flex flex-col basis-1/2 gap-2 p-1">
+                <label for="emailAddress" class="font-bold tracking-wider"
+                  >EMAIL</label
+                >
+                <input
+                  type="email"
+                  name="emailAdd"
+                  id="emailAddress"
+                  placeholder="mark@example.com"
+                  class="pl-2 border bg-gray-200 rounded-lg p-2 border-gray-300 placeholder:text-gray-700"
+                  required
+                />
+              </div>
+              <div class="flex flex-col basis-1/2 gap-2 p-1">
+                <label for="userPassword" class="tracking-wider font-bold"
+                  >PASSWORD</label
+                >
+                <input
+                  type="password"
+                  name="userPass"
+                  id="userPassword"
+                  placeholder="password321"
+                  class="pl-2 border bg-gray-200 rounded-lg p-2 border-gray-300 placeholder:text-gray-700"
+                  required
+                />
+              </div>
+            </fieldset>
+            <div class="w-full flex h-8">
+              <p id="error-login" class="text-red-500">
+                *Incorrect Email or Password
+              </p>
+              <div class="text-right flex-1">Forgot Password?</div>
+            </div>
+
+            <div class="text-center flex flex-col gap-4">
+              <button
+                class="p-4 font-bold tracking-widest rounded-3xl text-white text-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+              >
+                LOGIN
+              </button>
+              <p>Or Use</p>
+              <div class="flex items-center justify-center gap-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 48 48"
+                  class="w-10 h-10"
+                >
+                  <path
+                    fill="#FFC107"
+                    d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
+                  />
+                  <path
+                    fill="#FF3D00"
+                    d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
+                  />
+                  <path
+                    fill="#4CAF50"
+                    d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
+                  />
+                  <path
+                    fill="#1976D2"
+                    d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 48 48"
+                  class="h-10 w-10"
+                >
+                  <path
+                    fill="#03A9F4"
+                    d="M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.906,2.7-2.351,3.251-4.058c-1.428,0.837-3.01,1.452-4.693,1.776C34.967,9.884,33.05,9,30.926,9c-4.08,0-7.387,3.278-7.387,7.32c0,0.572,0.067,1.129,0.193,1.67c-6.138-0.308-11.582-3.226-15.224-7.654c-0.64,1.082-1,2.349-1,3.686c0,2.541,1.301,4.778,3.285,6.096c-1.211-0.037-2.351-0.374-3.349-0.914c0,0.022,0,0.055,0,0.086c0,3.551,2.547,6.508,5.923,7.181c-0.617,0.169-1.269,0.263-1.941,0.263c-0.477,0-0.942-0.054-1.392-0.135c0.94,2.902,3.667,5.023,6.898,5.086c-2.528,1.96-5.712,3.134-9.174,3.134c-0.598,0-1.183-0.034-1.761-0.104C9.268,36.786,13.152,38,17.321,38c13.585,0,21.017-11.156,21.017-20.834c0-0.317-0.01-0.633-0.025-0.945C39.763,15.197,41.013,13.905,42,12.429"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 48 48"
+                  class="h-10 w-10"
+                >
+                  <path
+                    fill="#039be5"
+                    d="M24 5A19 19 0 1 0 24 43A19 19 0 1 0 24 5Z"
+                  />
+                  <path
+                    fill="#fff"
+                    d="M26.572,29.036h4.917l0.772-4.995h-5.69v-2.73c0-2.075,0.678-3.915,2.619-3.915h3.119v-4.359c-0.548-0.074-1.707-0.236-3.897-0.236c-4.573,0-7.254,2.415-7.254,7.917v3.323h-4.701v4.995h4.701v13.729C22.089,42.905,23.032,43,24,43c0.875,0,1.729-0.08,2.572-0.194V29.036z"
+                  />
+                </svg>
+              </div>
             </div>
           </form>
         </div>
