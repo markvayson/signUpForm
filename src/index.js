@@ -16,7 +16,7 @@ const formDiv = document.getElementById("formDiv");
 const sidebar = document.getElementById("sidebar");
 const form = document.getElementById("form");
 const formLogin = document.getElementById("form-login");
-
+const loading = document.getElementById("loading");
 const userPassword = document.getElementById("userPass");
 const confirmPassword = document.getElementById("confirmPass");
 const error = document.getElementById("error-password");
@@ -179,4 +179,11 @@ window.onload = () => {
   errorLogin.style.display = "none";
   formLogin.style.display = "none";
   formLogin.style.opacity = 0;
+
+  setTimeout(() => {
+    loading.style.opacity = 0;
+  }, 300);
+  loading.addEventListener("transitionend", () => {
+    loading.style.display = "none";
+  });
 };
