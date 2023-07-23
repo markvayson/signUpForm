@@ -107,7 +107,6 @@ function postData() {
 
   let obj = new Object();
   let entries = formData.entries();
-  console.log("🚀 ~ file: index.js:96 ~ postData ~ entries:", entries);
 
   for (let [name, value] of formData.entries()) {
     obj[name] = value;
